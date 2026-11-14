@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Todo App</title>
+  <!-- Connect the styling file -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <h1>My Todos</h1>
+
+    <!-- The form where you type a new task -->
+    <form id="todo-form">
+      <input id="todo-input" type="text" placeholder="What do you need to do?" autocomplete="off">
+      <button type="submit">Add</button>
+    </form>
+
+    <!-- Buttons to filter the list -->
+    <div class="filters">
+      <button class="filter active" data-filter="all">All</button>
+      <button class="filter" data-filter="active">Active</button>
+      <button class="filter" data-filter="done">Done</button>
+    </div>
+
+    <!-- The list starts empty. JavaScript fills it in. -->
+    <ul id="todo-list"></ul>
+
+    <p id="counter"></p>
+  </main>
+
+  <!-- Connect the logic file (always at the end, so the page exists first) -->
+  <script src="app.js"></script>
+</body>
+</html>

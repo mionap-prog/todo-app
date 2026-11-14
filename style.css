@@ -1,0 +1,118 @@
+/* Whole page: background color and font */
+body {
+  font-family: system-ui, sans-serif;
+  background: #e0f5e4;
+  margin: 0;
+  padding: 40px 16px;
+}
+
+/* The white card in the middle */
+.app {
+  max-width: 420px;
+  margin: 0 auto;
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  margin-top: 0;
+  color: #2e6b45;
+}
+
+/* Input + Add button sit side by side */
+form {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  flex: 1; /* take all the leftover space */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #3a9d5d;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2e7d4a;
+}
+
+/* Filter buttons look lighter */
+.filters {
+  margin: 16px 0;
+  display: flex;
+  gap: 6px;
+}
+
+.filter {
+  background: #eee;
+  color: #333;
+}
+
+.filter.active {
+  background: #3a9d5d;
+  color: white;
+}
+
+/* The Done filter button is blue */
+.filter[data-filter="done"] {
+  background: #3b82f6;
+  color: white;
+}
+
+.filter[data-filter="done"]:hover,
+.filter[data-filter="done"].active {
+  background: #1d4ed8;
+}
+
+/* The list of tasks */
+ul {
+  list-style: none; /* remove the bullet points */
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+li span {
+  flex: 1;
+}
+
+/* A finished task gets crossed out */
+li.done span {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.delete {
+  background: transparent;
+  color: #e74c3c;
+  font-size: 18px;
+  padding: 4px 8px;
+}
+
+.delete:hover {
+  background: #fdecea;
+}
+
+#counter {
+  color: #777;
+  font-size: 14px;
+}
