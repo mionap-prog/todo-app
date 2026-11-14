@@ -108,5 +108,33 @@ filterButtons.forEach(function (button) {
   });
 });
 
-// ===== 7. Draw the list once when the page opens =====
+// ===== 7. Dark mode toggle (theme lives on <html data-theme>, separate from the todo list) =====
+const themeToggle = document.getElementById("theme-toggle");
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+}
+
+function loadTheme() {
+  try {
+    return localStorage.getItem("theme") === "dark" ? "dark" : "light";
+  } catch (e) {
+    return "light";
+  }
+}
+
+themeToggle.addEventListener("click", function () {
+  const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(next);
+  try {
+    localStorage.setItem("theme", next);
+  } catch (e) {
+    // Theme just won't be remembered.
+  }
+});
+
+applyTheme(loadTheme());
+
+// ===== 8. Draw the list once when the page opens =====
 render();

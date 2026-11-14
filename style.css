@@ -116,3 +116,84 @@ li.done span {
   color: #777;
   font-size: 14px;
 }
+
+/* Header row: title + theme toggle */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#theme-toggle {
+  background: #eee;
+  padding: 6px 10px;
+}
+
+#theme-toggle:hover {
+  background: #ddd;
+}
+
+/* Dark mode */
+[data-theme="dark"] body {
+  background: #1a1a1f;
+}
+
+[data-theme="dark"] .app {
+  background: #26262d;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] h1 {
+  color: #6fcf97;
+}
+
+[data-theme="dark"] input[type="text"] {
+  background: #1a1a1f;
+  color: #eee;
+  border-color: #444;
+}
+
+[data-theme="dark"] .filter {
+  background: #3a3a44;
+  color: #eee;
+}
+
+[data-theme="dark"] .filter.active {
+  background: #3a9d5d;
+  color: white;
+}
+
+[data-theme="dark"] .filter[data-filter="done"] {
+  background: #3b82f6;
+  color: white;
+}
+
+[data-theme="dark"] .filter[data-filter="done"]:hover,
+[data-theme="dark"] .filter[data-filter="done"].active {
+  background: #1d4ed8;
+}
+
+[data-theme="dark"] li {
+  color: #eee;
+  border-bottom-color: #3a3a44;
+}
+
+[data-theme="dark"] li.done span {
+  color: #777;
+}
+
+[data-theme="dark"] .delete:hover {
+  background: #3d2a2a;
+}
+
+[data-theme="dark"] #counter {
+  color: #aaa;
+}
+
+[data-theme="dark"] #theme-toggle {
+  background: #3a3a44;
+}
+
+[data-theme="dark"] #theme-toggle:hover {
+  background: #4a4a55;
+}
