@@ -1,12 +1,14 @@
 // ===== 1. Grab the parts of the page we need =====
 const form = document.getElementById("todo-form");
 const input = document.getElementById("todo-input");
+const dueInput = document.getElementById("due-input");
 const list = document.getElementById("todo-list");
 const counter = document.getElementById("counter");
 const filterButtons = document.querySelectorAll(".filter");
 
 // ===== 2. The data: a list of todo objects =====
-// Each todo looks like: { id: 123, text: "Buy milk", done: false }
+// Each todo looks like: { id: 123, text: "Buy milk", done: false, due: "2026-11-20" }
+// "due" is optional: a "YYYY-MM-DD" string, or "" / missing when there is no due date.
 let todos = loadTodos();
 let currentFilter = "all";
 
@@ -28,6 +30,28 @@ function loadTodos() {
 }
 
 // ===== 4. Draw the list on the screen =====
+// Today's date as "YYYY-MM-DD" in the user's local time (so it compares correctly with <input type="date">)
+function todayString() {
+  const d = new Date();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return d.getFullYear() + "-" + month + "-" + day;
+}
+
+// A todo is overdue when it has a due date in the past and isn't finished
+function isOverdue(todo) {
+  return !todo.done && !!todo.due && todo.due < todayString();
+}
+
+function formatDue(due) {
+  const parts = due.split("-");
+  return new Date(parts[0], parts[1] - 1, parts[2]).toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+
 function render() {
   list.innerHTML = ""; // clear the old list
 
@@ -60,7 +84,18 @@ function render() {
       deleteTodo(todo.id);
     });
 
-    li.append(checkbox, text, deleteBtn);
+    li.append(checkbox, text);
+
+    if (todo.due) {
+      const overdue = isOverdue(todo);
+      if (overdue) li.classList.add("overdue");
+      const due = document.createElement("small");
+      due.className = "due";
+      due.textContent = (overdue ? "⚠️ Overdue: " : "Due ") + formatDue(todo.due);
+      li.appendChild(due);
+    }
+
+    li.appendChild(deleteBtn);
     list.appendChild(li);
   });
 
@@ -70,8 +105,8 @@ function render() {
 }
 
 // ===== 5. Actions: add, toggle, delete =====
-function addTodo(text) {
-  todos.push({ id: Date.now(), text: text, done: false });
+function addTodo(text, due) {
+  todos.push({ id: Date.now(), text: text, done: false, due: due });
   saveTodos();
   render();
 }
@@ -95,8 +130,9 @@ form.addEventListener("submit", function (event) {
   event.preventDefault(); // stop the page from reloading
   const text = input.value.trim();
   if (text === "") return; // ignore empty tasks
-  addTodo(text);
+  addTodo(text, dueInput.value);
   input.value = "";
+  dueInput.value = "";
 });
 
 filterButtons.forEach(function (button) {

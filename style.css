@@ -27,8 +27,12 @@ form {
   gap: 8px;
 }
 
-input {
+input[type="text"] {
   flex: 1; /* take all the leftover space */
+  min-width: 0;
+}
+
+input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -101,6 +105,23 @@ li.done span {
   color: #999;
 }
 
+/* Due date label next to a task */
+.due {
+  color: #777;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Overdue tasks get a red warning */
+li.overdue span {
+  color: #c0392b;
+}
+
+li.overdue .due {
+  color: #c0392b;
+  font-weight: 600;
+}
+
 .delete {
   background: transparent;
   color: #e74c3c;
@@ -147,7 +168,18 @@ li.done span {
   color: #6fcf97;
 }
 
-[data-theme="dark"] input[type="text"] {
+[data-theme="dark"] .due {
+  color: #aaa;
+}
+
+[data-theme="dark"] li.overdue span,
+[data-theme="dark"] li.overdue .due {
+  color: #ff7b72;
+}
+
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="date"] {
+  color-scheme: dark;
   background: #1a1a1f;
   color: #eee;
   border-color: #444;
